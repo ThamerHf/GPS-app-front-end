@@ -1,28 +1,28 @@
 package com.akatsuki.gps_app_front.model;
 
 public class Location {
-    public Location(String tag, Long elemCount) {
-        this.tag = tag;
-        ElemCount = elemCount;
+    public Location(String locationName, String description) {
+        this.locationName = locationName ;
+        this.description = description;
     }
 
-    private String tag;
+    private String locationName;
 
-    private Long ElemCount;
+    private String description;
 
-    public Long getElemCount() {
-        return ElemCount;
+    public String getLocationName() {
+        return locationName;
     }
 
-    public void setElemCount(Long elemCount) {
-        ElemCount = elemCount;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
     }
 
-    public String getTag() {
-        return tag;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
