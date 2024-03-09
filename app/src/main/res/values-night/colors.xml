@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="fef7ff">#FEF7FF</color>
+<resources>#F8222222
+    <color name="fef7ff">#F8171616</color>
+    <color name="f9f6fa">#F8171616</color>
+    <color name="f1eff3">#F8171616</color>
+    <color name="f5eff7">#FF000000</color>
+    <color name="bb00cc">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
 </resources>
