@@ -3,10 +3,11 @@
     <color name="fef7ff">#F8171616</color>
     <color name="f9f6fa">#F8171616</color>
     <color name="f1eff3">#F8171616</color>
-    <color name="f5eff7">#F8171616</color>
+    <color name="f5eff7">#F8201F1F</color>
     <color name="bb00cc">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="d0d9d4">#FF000000</color>
     <color name="color_register_login_text">#FFFFFFFF</color>
     <color name="item_register_login">#F8171616</color>
+    <color name="_000000">#FFFFFFFF</color>
 </resources>

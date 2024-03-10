@@ -26,7 +26,6 @@
             android:background="@drawable/back_background"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="onBackButtonClick"
             android:orientation="horizontal"
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
