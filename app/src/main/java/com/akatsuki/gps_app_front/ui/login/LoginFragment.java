@@ -1,6 +1,9 @@
 package com.akatsuki.gps_app_front.ui.login;
 
+<<<<<<< Updated upstream
 import androidx.fragment.app.FragmentTransaction;
+=======
+>>>>>>> Stashed changes
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
@@ -8,8 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
+<<<<<<< Updated upstream
 import android.content.Intent;
 import android.graphics.Color;
+=======
+>>>>>>> Stashed changes
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,17 +26,26 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< Updated upstream
 import android.widget.LinearLayout;
+=======
+>>>>>>> Stashed changes
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< Updated upstream
 import com.akatsuki.gps_app_front.MainActivity;
 import com.akatsuki.gps_app_front.databinding.FragmentLoginBinding;
 
 import com.akatsuki.gps_app_front.R;
 import com.akatsuki.gps_app_front.ui.profile.ProfileFragment;
 import com.akatsuki.gps_app_front.ui.register.RegisterFragment;
+=======
+import com.akatsuki.gps_app_front.databinding.FragmentLoginBinding;
+
+import com.akatsuki.gps_app_front.R;
+>>>>>>> Stashed changes
 
 public class LoginFragment extends Fragment {
 
@@ -58,6 +73,7 @@ public class LoginFragment extends Fragment {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
+<<<<<<< Updated upstream
         final Button switchRegisterButton = binding.switchRegisterButton;
         final LinearLayout backButton = binding.backButton;
 
@@ -74,6 +90,8 @@ public class LoginFragment extends Fragment {
                 startActivity(new Intent(getActivity(), MainActivity.class));
             }
         }));
+=======
+>>>>>>> Stashed changes
 
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {
             @Override
@@ -82,10 +100,13 @@ public class LoginFragment extends Fragment {
                     return;
                 }
                 loginButton.setEnabled(loginFormState.isDataValid());
+<<<<<<< Updated upstream
 
                 int buttonColor = loginButton.isEnabled() ? Color.parseColor("#66BF81") :
                         /* Couleur par défaut */ Color.GRAY;
                 loginButton.setBackgroundColor(buttonColor);
+=======
+>>>>>>> Stashed changes
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
                 }
@@ -174,6 +195,7 @@ public class LoginFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+<<<<<<< Updated upstream
 
     private void switchToFragment(Fragment fragment) {
         FragmentTransaction transaction = requireActivity()
@@ -182,4 +204,6 @@ public class LoginFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+=======
+>>>>>>> Stashed changes
 }

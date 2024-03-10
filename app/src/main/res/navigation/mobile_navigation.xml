@@ -24,4 +24,8 @@
         android:id="@+id/navigation_profile"
         android:name="com.akatsuki.gps_app_front.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/login_page"
+        android:name="com.akatsuki.gps_app_front.ui.login.LoginFragment"
+        tools:layout="@layout/fragment_login"/>
 </navigation>
