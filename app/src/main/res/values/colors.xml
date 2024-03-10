@@ -15,4 +15,5 @@
     <color name="d0d9d4">#D0D9D4</color>
     <color name="color_register_login_text">#FF000000</color>
     <color name="item_register_login">#d0d9d4</color>
+    <color name="_000000">#000000</color>
 </resources>

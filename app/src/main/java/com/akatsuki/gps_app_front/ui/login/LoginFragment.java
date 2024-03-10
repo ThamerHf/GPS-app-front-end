@@ -71,7 +71,7 @@ public class LoginFragment extends Fragment {
         backButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToFragment(new ProfileFragment());
+                startActivity(new Intent(getActivity(), MainActivity.class));
             }
         }));
 
@@ -178,7 +178,7 @@ public class LoginFragment extends Fragment {
     private void switchToFragment(Fragment fragment) {
         FragmentTransaction transaction = requireActivity()
                 .getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_container, fragment);
+        transaction.replace(R.id.login_register_fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
