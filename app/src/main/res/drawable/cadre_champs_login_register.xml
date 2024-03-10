@@ -1,0 +1,17 @@
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Green border for the entire EditText -->
+<item>
+    <shape android:shape="rectangle">
+        <solid android:color="@android:color/transparent"/> <!-- Transparent background -->
+        <corners android:radius="8dp"/> <!-- Rounded corners, adjust as needed -->
+        <stroke android:color="#319371" android:width="2dp"/> <!-- Green border with 2dp width -->
+    </shape>
+</item>
+<!-- Invisible background for the area under the label -->
+<item android:top="30dp"> <!-- Adjust the top value based on your design -->
+    <shape android:shape="rectangle">
+        <solid android:color="@android:color/transparent"/> <!-- Transparent background -->
+    </shape>
+</item>
+</layer-list>
