@@ -1,34 +1,43 @@
 package com.akatsuki.gps_app_front.ui.profile;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.akatsuki.gps_app_front.LoginRegisterActivity;
-import com.akatsuki.gps_app_front.MainActivity;
-import com.akatsuki.gps_app_front.R;
-import com.akatsuki.gps_app_front.databinding.FragmentLocationsBinding;
 import com.akatsuki.gps_app_front.databinding.FragmentProfileBinding;
-import com.akatsuki.gps_app_front.ui.location.LocationsViewModel;
-import com.akatsuki.gps_app_front.ui.login.LoginFragment;
-import com.akatsuki.gps_app_front.ui.register.RegisterFragment;
 
 public class ProfileFragment extends Fragment {
 
+    private boolean isAuthentified;
+    private boolean editMode;
     private FragmentProfileBinding binding;
+
+    public boolean getAuthentified() {
+        return isAuthentified;
+    }
+
+    public void setAuthentified(boolean authentified) {
+        this.isAuthentified = authentified;
+    }
+
+    public boolean isEditMode() {
+        return editMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        this.editMode = editMode;
+    }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,9 +55,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LoginRegisterActivity.class));
             }
         });
-
-
-
         return root;
     }
 
@@ -58,6 +64,5 @@ public class ProfileFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
 
 }

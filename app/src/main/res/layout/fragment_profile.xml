@@ -7,33 +7,154 @@
     android:background="@color/d0d9d4"
     tools:context=".ui.profile.ProfileFragment">
 
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:background="@drawable/logo_gps"
+            android:id="@+id/avatar"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:layout_gravity="center_horizontal"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="153dp"
+            tools:layout_editor_absoluteY="198dp"
+            android:layout_marginTop="114dp"/>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="40dp"/>
+            android:hint="Username"
+            android:singleLine="true"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+            android:background="@null"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/logingo"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="@dimen/button_height"
-            app:cornerRadius="@dimen/button_radius"
-            android:text="@string/login_register"
-            android:backgroundTint="@color/login_green"
-            android:clickable="true" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="15dp"
+            app:cardBackgroundColor="#F1F1F1"
+            tools:ignore="MissingConstraints"
+            android:layout_marginBottom="40dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="65dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <TextView
+                    android:id="@+id/personal_inf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="Personal information"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/your_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@null"
+                    android:hint="Your name"
+                    android:singleLine="true"
+                    android:textSize="16dp" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@null"
+                    android:hint="Email"
+                    android:singleLine="true"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="65dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:ignore="MissingConstraints"
+            android:visibility="visible">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logout"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:backgroundTint="@color/disconnect_red"
+                android:clickable="true"
+                android:text="@string/logout"
+                app:cornerRadius="@dimen/button_radius"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete_account"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:backgroundTint="@color/backround"
+                app:strokeColor="@color/disconnect_red"
+                app:strokeWidth="2dp"
+                android:textColor="@color/disconnect_red"
+                android:clickable="true"
+                android:text="@string/delete_account"
+                app:cornerRadius="@dimen/button_radius"/>
 
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="65dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:ignore="MissingConstraints"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/logo_gps" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logingo"
+                android:layout_width="@dimen/button_width"
+                android:layout_height="@dimen/button_height"
+                android:backgroundTint="@color/login_green"
+                android:clickable="true"
+                android:text="@string/login_register"
+                app:cornerRadius="@dimen/button_radius" />
 
 
-
-
+        </LinearLayout>
     </LinearLayout>
+
+
+
 </ScrollView>

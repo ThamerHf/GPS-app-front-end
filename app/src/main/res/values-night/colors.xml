@@ -10,4 +10,6 @@
     <color name="color_register_login_text">#FFFFFFFF</color>
     <color name="item_register_login">#F8171616</color>
     <color name="_000000">#FFFFFFFF</color>
+    <color name="disconnect_red">#C4FF5151</color>
+    <color name="login_green">#66BF81</color>
 </resources>

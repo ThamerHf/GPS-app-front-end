@@ -18,4 +18,5 @@
     <color name="_000000">#000000</color>
     <color name="disconnect_red">#C4FF5151</color>
     <color name="login_green">#66BF81</color>
+    <color name="backround">#D0D9D4</color>
 </resources>
