@@ -36,4 +36,12 @@ public class AuthenToken {
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        return "AuthenToken{" +
+                "id=" + id +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }
