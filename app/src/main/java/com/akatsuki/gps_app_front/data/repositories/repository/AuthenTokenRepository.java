@@ -7,7 +7,6 @@ import com.akatsuki.gps_app_front.data.model.entity.AuthenToken;
 import com.akatsuki.gps_app_front.data.repositories.dao.AuthenTokenDao;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.CompletableObserver;
@@ -35,12 +34,12 @@ public class AuthenTokenRepository {
 
                 @Override
                 public void onSuccess(List<AuthenToken> authenToken) {
-                    callback.onLoginSuccess(authenToken);
+                    callback.onCallBackSuccess(authenToken);
                 }
 
                 @Override
                 public void onError(Throwable e) {
-                    callback.onLoginError(new IOException("update token failed"));
+                    callback.onCallBackError(new IOException("update token failed"));
                 }
             }
         );
@@ -58,13 +57,13 @@ public class AuthenTokenRepository {
                @Override
                public void onSuccess(List<AuthenToken> authenToken) {
                    if (!authenToken.isEmpty()) {
-                       callback.onLoginSuccess(authenToken.get(0));
+                       callback.onCallBackSuccess(authenToken.get(0));
                    }
                }
 
                @Override
                public void onError(Throwable e) {
-                   callback.onLoginError(new IOException("update token failed"));
+                   callback.onCallBackError(new IOException("update token failed"));
                }
             }
         );

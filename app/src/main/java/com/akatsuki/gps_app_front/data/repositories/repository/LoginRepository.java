@@ -73,12 +73,12 @@ public class LoginRepository {
 
         dataSource.login(username, password, new AppCallback<TokenResponseDto>() {
             @Override
-            public void onLoginSuccess(TokenResponseDto token) {
+            public void onCallBackSuccess(TokenResponseDto token) {
                 authenToken.setToken(token.getToken());
 
                 authenTokenRepository.getAllToken(new AppCallback<List<AuthenToken>>() {
                     @Override
-                    public void onLoginSuccess(List<AuthenToken> authenTokens) {
+                    public void onCallBackSuccess(List<AuthenToken> authenTokens) {
                         if (authenTokens.isEmpty()) {
                             authenTokenRepository.addToken(authenToken);
                         } else {
@@ -88,14 +88,14 @@ public class LoginRepository {
                     }
 
                     @Override
-                    public void onLoginError(IOException exception) {
+                    public void onCallBackError(IOException exception) {
                         Log.e("Update token", Objects.requireNonNull(exception.getMessage()));
                     }
                 });
                 Log.d("token ", token.getToken());
                 dataSource.getAuthenticatedUser(authenToken.getToken(), new AppCallback<LoggedInUser>() {
                     @Override
-                    public void onLoginSuccess(LoggedInUser loggedInUser) {
+                    public void onCallBackSuccess(LoggedInUser loggedInUser) {
                         loggedInUserAuth.setUserName(loggedInUser.getUserName());
                         loggedInUserAuth.setFirstName(loggedInUser.getFirstName());
                         loggedInUserAuth.setEmail(loggedInUser.getEmail());
@@ -106,7 +106,7 @@ public class LoginRepository {
                     }
 
                     @Override
-                    public void onLoginError(IOException exception) {
+                    public void onCallBackError(IOException exception) {
                         Log.e("Auhtentication info", "Failed to get authenticated User");
                         loginResult.setValue(new LoginResult(
                                 new LoggedInUserView("Login Failed")));
@@ -115,7 +115,7 @@ public class LoginRepository {
             }
 
             @Override
-            public void onLoginError(IOException exception) {
+            public void onCallBackError(IOException exception) {
                 Log.e("Login", "Authentication failed");
             }
         });

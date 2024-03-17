@@ -37,20 +37,20 @@ public class LoginDataSource {
                         // Création de l'utilisateur connecté avec le token reçu
                         LoggedInUser loggedInUser = new LoggedInUser(
                                 tokenResponse.getToken(), username);
-                        callback.onLoginSuccess(tokenResponse);
+                        callback.onCallBackSuccess(tokenResponse);
                     } else {
                         // Gestion d'une réponse inattendue du serveur
-                        callback.onLoginError(new IOException("Unexpected response from server"));
+                        callback.onCallBackError(new IOException("Unexpected response from server"));
                     }
                 } else {
                     // Gérer les réponses d'erreur ici
-                    callback.onLoginError(new IOException("Login failed"));
+                    callback.onCallBackError(new IOException("Login failed"));
                 }
             }
 
             @Override
             public void onFailure(Call<TokenResponseDto> call, Throwable t) {
-                callback.onLoginError(new IOException("Error during login", t));
+                callback.onCallBackError(new IOException("Error during login", t));
             }
         });
 
@@ -75,21 +75,21 @@ public class LoginDataSource {
                                 authenticatedUser.getFirstName(),
                                 authenticatedUser.getLastName(),
                                 authenticatedUser.getEmail());
-                        callback.onLoginSuccess(loggedInUser);
+                        callback.onCallBackSuccess(loggedInUser);
                     } else {
                         // Gestion d'une réponse inattendue du serveur
-                        callback.onLoginError(new IOException("Unexpected response from server"));
+                        callback.onCallBackError(new IOException("Unexpected response from server"));
                     }
                 } else {
                     // Gérer les réponses d'erreur ici
-                    callback.onLoginError(new IOException("Login failed"));
+                    callback.onCallBackError(new IOException("Login failed"));
                 }
             }
 
             @Override
             public void onFailure(Call<AuthenticatedUserResponseDto> call, Throwable t) {
                 // Gérer les échecs de la requête ici
-                callback.onLoginError(new IOException("Error during login", t));
+                callback.onCallBackError(new IOException("Error during login", t));
             }
         });
 
