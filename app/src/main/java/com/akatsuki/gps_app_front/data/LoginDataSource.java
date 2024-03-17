@@ -3,20 +3,15 @@ package com.akatsuki.gps_app_front.data;
 import android.util.Log;
 
 import com.akatsuki.gps_app_front.api.AuthenticationApi;
-import com.akatsuki.gps_app_front.callback.LoginCallback;
-import com.akatsuki.gps_app_front.config.AppInterceptor;
+import com.akatsuki.gps_app_front.callback.AppCallback;
 import com.akatsuki.gps_app_front.data.model.dto.request.LoginRequestDto;
 import com.akatsuki.gps_app_front.data.model.dto.response.AuthenticatedUserResponseDto;
 import com.akatsuki.gps_app_front.data.model.dto.response.TokenResponseDto;
-import com.akatsuki.gps_app_front.data.model.entity.AuthenToken;
 import com.akatsuki.gps_app_front.data.model.entity.LoggedInUser;
 import com.akatsuki.gps_app_front.data.network.RetrofitClient;
 
 import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +21,7 @@ import retrofit2.Response;
  */
 public class LoginDataSource {
 
-    public void login(String username, String password, final LoginCallback callback) {
+    public void login(String username, String password, final AppCallback<TokenResponseDto> callback) {
         AuthenticationApi authenticationApi = RetrofitClient.getClient()
                 .create(AuthenticationApi.class);
 
@@ -42,7 +37,7 @@ public class LoginDataSource {
                         // Création de l'utilisateur connecté avec le token reçu
                         LoggedInUser loggedInUser = new LoggedInUser(
                                 tokenResponse.getToken(), username);
-                        callback.onLoginSuccess(loggedInUser);
+                        callback.onLoginSuccess(tokenResponse);
                     } else {
                         // Gestion d'une réponse inattendue du serveur
                         callback.onLoginError(new IOException("Unexpected response from server"));
@@ -59,20 +54,16 @@ public class LoginDataSource {
             }
         });
 
-        try {
-            Thread.sleep(1000); // Attendre 2 secondes (2000 millisecondes)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 
-    /*public void getAuthenticatedUser(String token, final LoginCallback<LoggedInUser> callback) {
+    public void getAuthenticatedUser(String token, final AppCallback<LoggedInUser> callback) {
         AuthenticationApi authenticationApi = RetrofitClient.getClient()
                 .create(AuthenticationApi.class);
 
+        Log.d("Token ", "Bearer " + token);
+
         Call<AuthenticatedUserResponseDto> call = authenticationApi.getAuthenticatedUser(
-                token);
+                "Bearer " + token);
         call.enqueue(new Callback<AuthenticatedUserResponseDto>() {
             @Override
             public void onResponse(Call<AuthenticatedUserResponseDto> call,
@@ -101,7 +92,8 @@ public class LoginDataSource {
                 callback.onLoginError(new IOException("Error during login", t));
             }
         });
-    }*/
+
+    }
 
     public void logout() {
         // TODO: révoquer l'authentification

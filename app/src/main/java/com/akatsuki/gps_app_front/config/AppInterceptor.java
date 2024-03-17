@@ -14,7 +14,7 @@ public class AppInterceptor implements Interceptor {
 
         // Ajouter l'en-tête Content-Type si ce n'est pas déjà présent
         Request modifiedRequest = originalRequest.newBuilder()
-                .header("Content-Type", "application/json")
+                .header("Content-Type", "application/json")  // Définir le type de contenu JSON
                 .header("Accept", "application/json")
                 .method(originalRequest.method(), originalRequest.body())
                 .build();

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import com.akatsuki.gps_app_front.data.LoginRepository;
+import com.akatsuki.gps_app_front.data.repositories.repository.LoginRepository;
 import com.akatsuki.gps_app_front.data.Result;
 import com.akatsuki.gps_app_front.data.model.entity.LoggedInUser;
 import com.akatsuki.gps_app_front.R;
@@ -31,14 +31,7 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
-
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getFirstName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+        Result<LoggedInUser> result = loginRepository.login(username, password, loginResult);
     }
 
     public void loginDataChanged(String username, String password) {
