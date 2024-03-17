@@ -1,6 +1,14 @@
 package com.akatsuki.gps_app_front.data;
 
-import com.akatsuki.gps_app_front.data.model.LoggedInUser;
+import android.util.Log;
+
+import com.akatsuki.gps_app_front.callback.LoginCallback;
+import com.akatsuki.gps_app_front.data.model.dto.response.AuthenticatedUserResponseDto;
+import com.akatsuki.gps_app_front.data.model.dto.response.TokenResponseDto;
+import com.akatsuki.gps_app_front.data.model.entity.AuthenToken;
+import com.akatsuki.gps_app_front.data.model.entity.LoggedInUser;
+
+import java.io.IOException;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -44,11 +52,38 @@ public class LoginRepository {
     }
 
     public Result<LoggedInUser> login(String username, String password) {
+        AuthenToken authenToken = new AuthenToken();
+        LoggedInUser loggedInUserAuth = new LoggedInUser(username, username);
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
-        if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
-        }
-        return result;
+        dataSource.login(username, password, new LoginCallback() {
+            @Override
+            public void onLoginSuccess(LoggedInUser loggedInUser) {
+                //authenToken.setToken(token.getToken());
+                //Log.d("Authorization  ", "Bearer " + user.getUserName());
+                Log.d("aaaa ", loggedInUser.getUserName());
+            }
+
+            @Override
+            public void onLoginError(IOException exception) {
+                Log.e("Login", "Authentication failed");
+            }
+        });
+
+        /*dataSource.getAuthenticatedUser(authenToken.getToken(), new LoginCallback<LoggedInUser>() {
+            @Override
+            public void onLoginSuccess(LoggedInUser loggedInUser) {
+                loggedInUserAuth.setUserName(loggedInUser.getUserName());
+                loggedInUserAuth.setFirstName(loggedInUser.getFirstName());
+                loggedInUserAuth.setEmail(loggedInUser.getEmail());
+                loggedInUserAuth.setLastName(loggedInUser.getLastName());
+            }
+
+            @Override
+            public void onLoginError(IOException exception) {
+                Log.e("Auhtentication info", "Failed to get authenticated User");
+            }
+        });*/
+
+        return new Result.Success<>(loggedInUserAuth);
     }
 }
