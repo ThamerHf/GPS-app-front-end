@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.akatsuki.gps_app_front.LoginRegisterActivity;
@@ -23,7 +24,7 @@ import com.akatsuki.gps_app_front.databinding.FragmentProfileBinding;
 public class ProfileFragment extends Fragment {
 
     private boolean isAuthentified;
-    private boolean editMode;
+    private boolean editMode = false;
     private FragmentProfileBinding binding;
 
     public boolean getAuthentified() {
@@ -53,7 +54,7 @@ public class ProfileFragment extends Fragment {
 
         this.setAuthentified(true);
 
-        if(this.getAuthentified() == true) {
+        if(this.getAuthentified()) {
             binding.avatar.setVisibility(View.VISIBLE);
             binding.username.setVisibility(View.VISIBLE);
             binding.card.setVisibility(View.VISIBLE);
@@ -68,6 +69,27 @@ public class ProfileFragment extends Fragment {
         }
 
         binding.avatar.setImageResource(R.drawable.user_default_avatar);
+
+        final ImageButton editProfile = binding.editProfile;
+
+       editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setEditMode(true);
+                chageToEditMode();
+            }
+        });
+
+       final Button saveProfile = binding.saveProfile;
+
+        saveProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setEditMode(false);
+                chageToEditMode();
+            }
+        });
+
 
         final Button goLogin = binding.logingo;
 
@@ -85,6 +107,26 @@ public class ProfileFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void chageToEditMode() {
+        if(this.isEditMode()) {
+            binding.avatar.setClickable(true);
+            binding.saveProfile.setVisibility(View.VISIBLE);
+            binding.logout.setVisibility(View.GONE);
+            binding.deleteAccount.setVisibility(View.GONE);
+            binding.username.setEnabled(true);
+            binding.yourName.setEnabled(true);
+            binding.email.setEnabled(true);
+        } else {
+            binding.avatar.setClickable(false);
+            binding.saveProfile.setVisibility(View.GONE);
+            binding.logout.setVisibility(View.VISIBLE);
+            binding.deleteAccount.setVisibility(View.VISIBLE);
+            binding.username.setEnabled(false);
+            binding.yourName.setEnabled(false);
+            binding.email.setEnabled(false);
+        }
     }
 
 }

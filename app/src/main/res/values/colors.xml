@@ -20,4 +20,5 @@
     <color name="login_green">#66BF81</color>
     <color name="background">#D0D9D4</color>
     <color name="card_background">@color/cardview_light_background</color>
+    <color name="edit_icon_color">#282928</color>
 </resources>
