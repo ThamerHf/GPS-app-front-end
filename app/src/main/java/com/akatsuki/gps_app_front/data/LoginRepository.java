@@ -8,7 +8,11 @@ import com.akatsuki.gps_app_front.data.model.dto.response.TokenResponseDto;
 import com.akatsuki.gps_app_front.data.model.entity.AuthenToken;
 import com.akatsuki.gps_app_front.data.model.entity.LoggedInUser;
 
+import org.jetbrains.annotations.Async;
+
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.logging.Handler;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -55,6 +59,9 @@ public class LoginRepository {
         AuthenToken authenToken = new AuthenToken();
         LoggedInUser loggedInUserAuth = new LoggedInUser(username, username);
         // handle login
+
+        CompletableFuture<LoggedInUser> future = new CompletableFuture<>();
+
         dataSource.login(username, password, new LoginCallback() {
             @Override
             public void onLoginSuccess(LoggedInUser loggedInUser) {
@@ -68,6 +75,8 @@ public class LoginRepository {
                 Log.e("Login", "Authentication failed");
             }
         });
+
+
 
         /*dataSource.getAuthenticatedUser(authenToken.getToken(), new LoginCallback<LoggedInUser>() {
             @Override

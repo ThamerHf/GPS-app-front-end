@@ -13,6 +13,8 @@ import com.akatsuki.gps_app_front.data.model.entity.LoggedInUser;
 import com.akatsuki.gps_app_front.data.network.RetrofitClient;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -30,6 +32,7 @@ public class LoginDataSource {
 
         Call<TokenResponseDto> call = authenticationApi.login(
                 new LoginRequestDto(username, password));
+
         call.enqueue(new Callback<TokenResponseDto>() {
             @Override
             public void onResponse(Call<TokenResponseDto> call, Response<TokenResponseDto> response) {
@@ -37,7 +40,8 @@ public class LoginDataSource {
                     TokenResponseDto tokenResponse = response.body();
                     if (tokenResponse != null && tokenResponse.getToken() != null) {
                         // Création de l'utilisateur connecté avec le token reçu
-                        LoggedInUser loggedInUser = new LoggedInUser(tokenResponse.getToken(), username);
+                        LoggedInUser loggedInUser = new LoggedInUser(
+                                tokenResponse.getToken(), username);
                         callback.onLoginSuccess(loggedInUser);
                     } else {
                         // Gestion d'une réponse inattendue du serveur
@@ -45,18 +49,22 @@ public class LoginDataSource {
                     }
                 } else {
                     // Gérer les réponses d'erreur ici
-                    Log.e("aaaaaaaaaa " , "failllllllllllllllll");
                     callback.onLoginError(new IOException("Login failed"));
                 }
             }
 
             @Override
             public void onFailure(Call<TokenResponseDto> call, Throwable t) {
-                // Gérer les échecs de la requête ici
-                Log.e("bbbbbbbbbbbb " , "bbbbbbbbbbbbbbbbbbbb ");
                 callback.onLoginError(new IOException("Error during login", t));
             }
         });
+
+        try {
+            Thread.sleep(1000); // Attendre 2 secondes (2000 millisecondes)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /*public void getAuthenticatedUser(String token, final LoginCallback<LoggedInUser> callback) {
@@ -98,5 +106,6 @@ public class LoginDataSource {
     public void logout() {
         // TODO: révoquer l'authentification
     }
+
 
 }
