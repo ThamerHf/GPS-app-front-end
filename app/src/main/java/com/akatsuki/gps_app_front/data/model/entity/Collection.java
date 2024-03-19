@@ -1,4 +1,4 @@
-package com.akatsuki.gps_app_front.model;
+package com.akatsuki.gps_app_front.data.model.entity;
 
 public class Collection {
 
