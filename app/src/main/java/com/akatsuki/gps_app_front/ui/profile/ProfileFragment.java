@@ -111,6 +111,7 @@ public class ProfileFragment extends Fragment {
 
     private void chageToEditMode() {
         if(this.isEditMode()) {
+            binding.editProfile.setVisibility(View.GONE);
             binding.avatar.setClickable(true);
             binding.saveProfile.setVisibility(View.VISIBLE);
             binding.logout.setVisibility(View.GONE);
@@ -119,6 +120,7 @@ public class ProfileFragment extends Fragment {
             binding.yourName.setEnabled(true);
             binding.email.setEnabled(true);
         } else {
+            binding.editProfile.setVisibility(View.VISIBLE);
             binding.avatar.setClickable(false);
             binding.saveProfile.setVisibility(View.GONE);
             binding.logout.setVisibility(View.VISIBLE);
