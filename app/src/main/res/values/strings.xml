@@ -28,11 +28,15 @@
     <string name="email">Email</string>
     <string name="user_name">User name</string>
     <string name="user204">user204</string>
+    <string name="login_register">Login/Register</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="save">Save</string>
     <string name="password_hint">******************</string>
     <string name="confirm_password">Confirm password</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="hugo">HUGO</string>
+    <string name="delete_account">Delete Account</string>
 </resources>
