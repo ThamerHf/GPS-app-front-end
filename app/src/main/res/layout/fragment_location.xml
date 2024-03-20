@@ -46,7 +46,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Location title"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textStyle="bold"
+                    android:textSize="22dp"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -168,14 +170,22 @@
                     android:id="@+id/locationTags"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
+                    android:background="@color/edit_text"
                     android:hint="Description"
                     android:background="@color/e8f1ea"
                     android:inputType="text" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tags: "
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+
                 <EditText
                     android:id="@+id/locationDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/e8f1ea"
                     android:hint="Description"

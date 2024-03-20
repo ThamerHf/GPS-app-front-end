@@ -39,7 +39,8 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:background="@null"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                android:enabled="false"/>
 
             <ImageButton
                 android:id="@+id/edit_profile"
@@ -58,10 +59,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="15dp"
             app:cardBackgroundColor="@color/card_background"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="15dp"
             android:visibility="visible">
 
             <LinearLayout
@@ -79,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="15dp"
                     android:text="Personal information"
                     android:textSize="20dp"
                     android:textStyle="bold" />
@@ -89,23 +90,76 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@null"
                     android:hint="Your name"
                     android:singleLine="true"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:enabled="false"/>
+
+                <EditText
+                    android:id="@+id/firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@null"
+                    android:hint="Firstname"
+                    android:singleLine="true"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    android:enabled="true"/>
+
+                <EditText
+                    android:id="@+id/lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@null"
+                    android:hint="Lirstname"
+                    android:singleLine="true"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    android:enabled="true"/>
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@null"
                     android:hint="Email"
                     android:singleLine="true"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:enabled="false"/>
 
+                <EditText
+                    android:id="@+id/old_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@null"
+                    android:hint="Old Password"
+                    android:singleLine="true"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    android:enabled="true"/>
+
+                <EditText
+                    android:id="@+id/new_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@null"
+                    android:hint="New Password"
+                    android:singleLine="true"
+                    android:textSize="16dp"
+                    android:visibility="gone"
+                    android:enabled="true"/>
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -128,7 +182,6 @@
                 android:clickable="true"
                 android:text="@string/save"
                 app:cornerRadius="@dimen/button_radius"
-                android:layout_marginBottom="10dp"
                 android:visibility="gone"/>
 
             <com.google.android.material.button.MaterialButton
@@ -139,23 +192,7 @@
                 android:clickable="true"
                 android:text="@string/logout"
                 app:cornerRadius="@dimen/button_radius"
-                android:layout_marginBottom="10dp"
                 android:visibility="visible"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/delete_account"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:backgroundTint="@color/background"
-                app:strokeColor="@color/disconnect_red"
-                app:strokeWidth="2dp"
-                android:textColor="@color/disconnect_red"
-                android:clickable="true"
-                android:text="@string/delete_account"
-                app:cornerRadius="@dimen/button_radius"
-                android:visibility="visible"/>
-
-
 
         </LinearLayout>
 
