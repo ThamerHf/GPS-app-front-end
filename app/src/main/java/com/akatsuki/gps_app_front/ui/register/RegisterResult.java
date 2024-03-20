@@ -9,20 +9,20 @@ import com.akatsuki.gps_app_front.ui.login.LoggedInUserView;
  */
 public class RegisterResult {
     @Nullable
-    private LoggedInUserView success;
+    private RegisteredUserView success;
     @Nullable
     private Integer error;
 
-    RegisterResult(@Nullable Integer error) {
+    public RegisterResult(@Nullable Integer error) {
         this.error = error;
     }
 
-    public RegisterResult(@Nullable LoggedInUserView success) {
+    public RegisterResult(@Nullable RegisteredUserView success) {
         this.success = success;
     }
 
     @Nullable
-    LoggedInUserView getSuccess() {
+    RegisteredUserView getSuccess() {
         return success;
     }
 

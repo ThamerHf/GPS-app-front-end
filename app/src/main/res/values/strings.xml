@@ -39,4 +39,15 @@
     <string name="last_name">Last name</string>
     <string name="hugo">HUGO</string>
     <string name="delete_account">Delete Account</string>
+    <string name="not_a_valid_firstname">Not a valid firstName</string>
+    <string name="not_a_valid_lastname">Not a valid lastName</string>
+    <string name="not_a_valid_email">Email should be like : toto@domaine.com</string>
+    <string name="not_a_valid_password">Password must be >5 characters</string>
+    <string name="doesn_t_match_entred_password">Doesn\'t match entred password</string>
+    <string name="register_failed">Register Failed</string>
+    <string name="register_failed_username_already_used">Register failed : userName already used</string>
+    <string name="register_success_for_user">"Register success for user "</string>
+    <string name="authentication_is_required">Authentication is required</string>
+    <string name="you_should_login">You should login</string>
+    <string name="user204_gmail_com">user204@gmail.com</string>
 </resources>

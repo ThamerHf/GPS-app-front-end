@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.akatsuki.gps_app_front.R;
 import com.akatsuki.gps_app_front.callback.AppCallback;
 import com.akatsuki.gps_app_front.data.LoginDataSource;
 import com.akatsuki.gps_app_front.data.Result;
@@ -12,6 +13,7 @@ import com.akatsuki.gps_app_front.data.model.entity.AuthenToken;
 import com.akatsuki.gps_app_front.data.model.entity.LoggedInUser;
 import com.akatsuki.gps_app_front.ui.login.LoggedInUserView;
 import com.akatsuki.gps_app_front.ui.login.LoginResult;
+import com.akatsuki.gps_app_front.ui.register.RegisterResult;
 
 import java.io.IOException;
 import java.util.List;
@@ -66,7 +68,7 @@ public class LoginRepository {
     public Result<LoggedInUser> login(String username, String password,
                                       MutableLiveData<LoginResult> loginResult) {
         AuthenToken authenToken = new AuthenToken();
-        LoggedInUser loggedInUserAuth = new LoggedInUser("aaaaa", "aaaaaaaa");
+        LoggedInUser loggedInUserAuth = new LoggedInUser("dafault", "dafault");
         // handle login
 
         CompletableFuture<TokenResponseDto> future = new CompletableFuture<>();
@@ -85,37 +87,40 @@ public class LoginRepository {
                             authenToken.setId(authenTokens.get(0).getId());
                             authenTokenRepository.updateToken(authenToken);
                         }
+
+                        dataSource.getAuthenticatedUser(authenToken.getToken(),
+                                new AppCallback<LoggedInUser>() {
+                            @Override
+                            public void onCallBackSuccess(LoggedInUser loggedInUser) {
+                                loggedInUserAuth.setUserName(loggedInUser.getUserName());
+                                loggedInUserAuth.setFirstName(loggedInUser.getFirstName());
+                                loggedInUserAuth.setEmail(loggedInUser.getEmail());
+                                loggedInUserAuth.setLastName(loggedInUser.getLastName());
+                                Log.d("Get Auth User ", loggedInUserAuth.getUserName());
+                                loginResult.setValue(new LoginResult(
+                                        new LoggedInUserView(loggedInUserAuth.getFirstName())));
+                            }
+
+                            @Override
+                            public void onCallBackError(IOException exception) {
+                                Log.e("Auhtentication info", "Failed to get authenticated User");
+                                loginResult.setValue(new LoginResult(R.string.login_failed));
+                            }
+                        });
                     }
 
                     @Override
                     public void onCallBackError(IOException exception) {
+                        loginResult.setValue(new LoginResult(R.string.authentication_is_required));
                         Log.e("Update token", Objects.requireNonNull(exception.getMessage()));
                     }
                 });
                 Log.d("token ", token.getToken());
-                dataSource.getAuthenticatedUser(authenToken.getToken(), new AppCallback<LoggedInUser>() {
-                    @Override
-                    public void onCallBackSuccess(LoggedInUser loggedInUser) {
-                        loggedInUserAuth.setUserName(loggedInUser.getUserName());
-                        loggedInUserAuth.setFirstName(loggedInUser.getFirstName());
-                        loggedInUserAuth.setEmail(loggedInUser.getEmail());
-                        loggedInUserAuth.setLastName(loggedInUser.getLastName());
-                        Log.d("Get Auth User ", loggedInUserAuth.getUserName());
-                            loginResult.setValue(new LoginResult(
-                                    new LoggedInUserView(loggedInUserAuth.getFirstName())));
-                    }
-
-                    @Override
-                    public void onCallBackError(IOException exception) {
-                        Log.e("Auhtentication info", "Failed to get authenticated User");
-                        loginResult.setValue(new LoginResult(
-                                new LoggedInUserView("Login Failed")));
-                    }
-                });
             }
 
             @Override
             public void onCallBackError(IOException exception) {
+                loginResult.setValue(new LoginResult(R.string.login_failed));
                 Log.e("Login", "Authentication failed");
             }
         });
