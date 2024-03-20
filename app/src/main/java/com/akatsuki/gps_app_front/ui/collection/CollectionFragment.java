@@ -53,7 +53,7 @@ public class CollectionFragment extends Fragment {
         collectionViewModel.getCollections(new AppCallback<List<Collection>>() {
             @Override
             public void onCallBackSuccess(List<Collection> collectionsReceived) {
-                Log.d("location", "Debug callback succesful");
+                Log.d("collection", "Debug callback succesful");
                 collections.addAll(collectionsReceived);
                 CollectionListItemAdapter adapter = new CollectionListItemAdapter(requireContext(),
                         R.layout.fragment_collection_list_item,
@@ -81,7 +81,7 @@ public class CollectionFragment extends Fragment {
 
             @Override
             public void onCallBackError(IOException exception) {
-                Log.d("location", "callback unseccessful");
+                Log.d("collection", "callback unseccessful");
             }
         });
         // Ajoutez autant d'éléments que nécessaire

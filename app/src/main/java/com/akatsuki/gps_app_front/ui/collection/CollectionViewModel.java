@@ -47,7 +47,7 @@ public class CollectionViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<List<Collection>> call, Response<List<Collection>> response) {
                         if (response.isSuccessful()) {
-                            Log.d("location", "onResponse");
+                            Log.d("collection", "onResponse");
                             List<Collection> collections = response.body();
                             if (collections != null) {
                                 callback.onCallBackSuccess(collections);
@@ -58,7 +58,7 @@ public class CollectionViewModel extends ViewModel {
                         } else {
                             // Gérer les réponses d'erreur ici
                             callback.onCallBackError(new IOException("Login failed"));
-                            Log.d("location", "response unseccesful");
+                            Log.d("collection", "response unseccesful");
                         }
                     }
 
