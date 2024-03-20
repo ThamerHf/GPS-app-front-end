@@ -11,8 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.akatsuki.gps_app_front.data.model.entity.Location;
+import com.akatsuki.gps_app_front.ui.location.LocationFragment;
+import com.akatsuki.gps_app_front.ui.location.LocationsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +55,6 @@ public class LocationListItemAdapter extends ArrayAdapter<Location> implements F
 
         Location location = getItem(position);
 
-        // Remplir la vue avec les données de l'élément
-
         viewHolder.locationName.setText(location.getTitle());
         String tags = "";
         int i;
@@ -59,20 +62,29 @@ public class LocationListItemAdapter extends ArrayAdapter<Location> implements F
             try {
                 tags = tags + location.getTags().get(i) + ", ";
             } catch (Exception e) {
-
+                // Gérer l'exception si nécessaire
             }
         }
-
         tags = tags + "...";
         viewHolder.tags.setText(tags);
         if(location.getImage() == null){
             viewHolder.image.setImageResource(R.drawable.collection_default_image);
         }
-        /*else {
-            Bitmap bitmap = BitmapFactory
-                    .decodeByteArray(location.getImage(),0, location.getImage().length);
-            viewHolder.image.setImageBitmap(bitmap);
-        }*/
+
+        convertView.findViewById(R.id.cardLocation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Effectuer la transition vers le nouveau fragment
+                // Créer le nouveau fragment à afficher
+                Fragment newFragment = new LocationFragment(location);
+
+                // Commencer la transaction pour remplacer le fragment actuel par le nouveau fragment
+                FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_container, newFragment);
+                transaction.addToBackStack(null); // Ajouter à la pile de retour arrière, si nécessaire
+                transaction.commit();
+            }
+        });
 
         return convertView;
     }
