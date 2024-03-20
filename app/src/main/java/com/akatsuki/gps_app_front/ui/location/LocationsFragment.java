@@ -17,14 +17,17 @@ import androidx.lifecycle.ViewModelProvider;
 import com.akatsuki.gps_app_front.CollectionListItemAdapter;
 import com.akatsuki.gps_app_front.LocationListItemAdapter;
 import com.akatsuki.gps_app_front.R;
+import com.akatsuki.gps_app_front.callback.AppCallback;
+import com.akatsuki.gps_app_front.data.model.entity.Location;
+import com.akatsuki.gps_app_front.data.repositories.dao.AuthenTokenDao;
+import com.akatsuki.gps_app_front.data.repositories.repository.AuthenTokenRepository;
 import com.akatsuki.gps_app_front.databinding.FragmentCollectionBinding;
 import com.akatsuki.gps_app_front.databinding.FragmentLocationsBinding;
 import com.akatsuki.gps_app_front.ui.collection.CollectionViewModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 public class LocationsFragment extends Fragment {
 
     private FragmentLocationsBinding binding;
@@ -39,16 +42,22 @@ public class LocationsFragment extends Fragment {
 
         ListView list = binding.getRoot().findViewById(R.id.listLocations);
 
-        List<String> Locations = new ArrayList<>();
+        List<Location> locations =  new ArrayList<>();
+        locationsViewModel.getLocations(new AppCallback<List<Location>>() {
+            @Override
+            public void onCallBackSuccess(List<Location> locations) {
+                locations.addAll(locations);
+            }
 
-        for(int i = 0; i <= 16; i ++) {
-            Locations.add("titi" + i);
-        }
+            @Override
+            public void onCallBackError(IOException exception) {
 
+            }
+        });
         // Ajoutez autant d'éléments que nécessaire
 
         LocationListItemAdapter adapter = new LocationListItemAdapter(requireContext(), R.layout.location_list_item,
-                Locations);
+                locations);
         list.setAdapter(adapter);
 
         EditText editText = view.findViewById(R.id.searchLocation);

@@ -1,31 +1,36 @@
 package com.akatsuki.gps_app_front;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.akatsuki.gps_app_front.data.model.entity.Location;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationListItemAdapter extends ArrayAdapter<String> implements Filterable {
+public class LocationListItemAdapter extends ArrayAdapter<Location> implements Filterable {
 
     private Context context;
 
     private LayoutInflater inflater;
 
-    private List<String> filteredCollection;
+    private List<Location> filteredCollection;
 
-    private List<String> originalCollection;
+    private List<Location> originalCollection;
 
     public LocationListItemAdapter(@NonNull Context context, int resource,
-                                     @NonNull List<String> collections) {
+                                     @NonNull List<Location> collections) {
         super(context, resource, collections);
         inflater = LayoutInflater.from(context);
         filteredCollection = new ArrayList<>(collections);
@@ -45,19 +50,33 @@ public class LocationListItemAdapter extends ArrayAdapter<String> implements Fil
             viewHolder = (LocationListItemAdapter.ViewHolder) convertView.getTag();
         }
 
-        String tag = getItem(position);
+        Location location = getItem(position);
 
         // Remplir la vue avec les données de l'élément
-        viewHolder.locationName.setText(tag);
-        // Modifiez l'image ici si nécessaire (par exemple, à partir de ressources, d'URL, etc.)
+
+        viewHolder.locationName.setText(location.getTitle());
+        viewHolder.description.setText(location.getDescription());
+        if(location.getImage() == null){
+            viewHolder.image.setImageResource(R.drawable.collection_default_image);
+        }
+        else {
+            Bitmap bitmap = BitmapFactory
+                    .decodeByteArray(location.getImage(),0, location.getImage().length);
+            viewHolder.image.setImageBitmap(bitmap);
+        }
 
         return convertView;
     }
 
     private static class ViewHolder {
         TextView locationName;
+        TextView description;
+        ImageView image;
         ViewHolder(View view) {
+
             locationName = view.findViewById(R.id.LocationName);
+            description  = view.findViewById(R.id.LocationSupportingText);
+            image = view.findViewById(R.id.LocationImage);
         }
     }
 
@@ -68,13 +87,13 @@ public class LocationListItemAdapter extends ArrayAdapter<String> implements Fil
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString().toLowerCase().trim();
-                List<String> filteredList = new ArrayList<>();
+                List<Location> filteredList = new ArrayList<>();
                 if (charString.isEmpty()) {
                     filteredList.addAll(originalCollection);
                 } else {
-                    for (String tag : originalCollection) {
-                        if (tag.toLowerCase().contains(charString)) {
-                            filteredList.add(tag);
+                    for (Location location : originalCollection) {
+                        if (location.getTitle().toLowerCase().contains(charString)) {
+                            filteredList.add(location);
                         }
                     }
                 }
@@ -85,7 +104,7 @@ public class LocationListItemAdapter extends ArrayAdapter<String> implements Fil
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filteredCollection = (List<String>) results.values;
+                filteredCollection = (List<Location>) results.values;
                 notifyDataSetChanged();
             }
         };
@@ -97,7 +116,7 @@ public class LocationListItemAdapter extends ArrayAdapter<String> implements Fil
     }
 
     @Override
-    public String getItem(int position) {
+    public Location getItem(int position) {
         return filteredCollection.get(position);
     }
 }
