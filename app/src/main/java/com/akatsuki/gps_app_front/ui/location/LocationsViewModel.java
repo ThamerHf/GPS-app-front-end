@@ -1,5 +1,7 @@
 package com.akatsuki.gps_app_front.ui.location;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -30,10 +32,12 @@ public class LocationsViewModel extends ViewModel {
         mText.setValue("This is notifications fragment");
     }
     public void getLocations(final AppCallback<List<Location>> callback) {
+        Log.d("location", "test");
         this.authenTokenRepository.getAuthToken(new AppCallback<AuthenToken>() {
 
             @Override
             public void onCallBackSuccess(AuthenToken authenToken) {
+                System.out.println("1");
                 LocationApi locationApi = RetrofitClient.getClient()
                         .create(LocationApi.class);
                 Call<List<Location>> call = locationApi.getLocations();
@@ -42,6 +46,7 @@ public class LocationsViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
                         if (response.isSuccessful()) {
+                            Log.d("location", "onResponse");
                             List<Location> locations = response.body();
                             if (locations != null) {
                                 callback.onCallBackSuccess(locations);
@@ -52,12 +57,13 @@ public class LocationsViewModel extends ViewModel {
                         } else {
                             // Gérer les réponses d'erreur ici
                             callback.onCallBackError(new IOException("Login failed"));
+                            Log.d("location", "response unseccesful");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<Location>> call, Throwable t) {
-
+                        Log.d("location", "onFailure");
                     }
 
                 });

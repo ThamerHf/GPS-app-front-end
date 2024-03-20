@@ -3,6 +3,7 @@ package com.akatsuki.gps_app_front.ui.location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.akatsuki.gps_app_front.CollectionListItemAdapter;
 import com.akatsuki.gps_app_front.LocationListItemAdapter;
 import com.akatsuki.gps_app_front.R;
 import com.akatsuki.gps_app_front.callback.AppCallback;
+import com.akatsuki.gps_app_front.data.database.databaseClient.AuthTokenDataBaseClient;
 import com.akatsuki.gps_app_front.data.model.entity.Location;
 import com.akatsuki.gps_app_front.data.repositories.dao.AuthenTokenDao;
 import com.akatsuki.gps_app_front.data.repositories.repository.AuthenTokenRepository;
@@ -32,26 +34,33 @@ public class LocationsFragment extends Fragment {
 
     private FragmentLocationsBinding binding;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        LocationsViewModel locationsViewModel =
-                new ViewModelProvider(this).get(LocationsViewModel.class);
+        AuthenTokenRepository authenTokenRepository = new AuthenTokenRepository(AuthTokenDataBaseClient
+                .getInstance(requireContext()).authenTokenDao());
+        LocationsViewModel locationsViewModel = new LocationsViewModel(authenTokenRepository);
 
         binding = FragmentLocationsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
         ListView list = binding.getRoot().findViewById(R.id.listLocations);
+        Log.d("location", "test");
 
         List<Location> locations =  new ArrayList<>();
+
+
         locationsViewModel.getLocations(new AppCallback<List<Location>>() {
             @Override
-            public void onCallBackSuccess(List<Location> locations) {
-                locations.addAll(locations);
+            public void onCallBackSuccess(List<Location> locationsreceived) {
+                System.out.println("callbackSuccess");
+                Log.d("location", "Debug callback succesful");
+                locations.addAll(locationsreceived);
             }
 
             @Override
             public void onCallBackError(IOException exception) {
-
+                Log.d("location", "callback unseccessful");
             }
         });
         // Ajoutez autant d'éléments que nécessaire
