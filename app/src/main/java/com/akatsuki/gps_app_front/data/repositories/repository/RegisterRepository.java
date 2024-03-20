@@ -53,12 +53,17 @@ public class RegisterRepository {
             @Override
             public void onCallBackSuccess(RegisterMessage registerMessage) {
                 registerResult.setValue(new RegisterResult(
-                        new RegisteredUserView(registerMessage.getMessage())));
+                        new RegisteredUserView(username, registerMessage.getMessage())));
             }
 
             @Override
             public void onCallBackError(IOException exception) {
-                registerResult.setValue(new RegisterResult(new Integer(R.string.register_failed)));
+                if (exception.getMessage() != null && exception.getMessage().equals("EXISTS")) {
+                    registerResult.setValue(new RegisterResult(
+                            R.string.register_failed_username_already_used));
+                } else {
+                    registerResult.setValue(new RegisterResult(R.string.register_failed));
+                }
                 Log.e("Register", "Register failed");
             }
         });

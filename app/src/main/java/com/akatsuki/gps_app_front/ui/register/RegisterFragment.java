@@ -186,11 +186,13 @@ public class RegisterFragment extends Fragment {
     }
 
     private void updateUiWithUser(RegisteredUserView model) {
-        String welcome = getString(R.string.welcome) + model.getMessage();
+        String register = model.getMessage() + "\n" + getString(R.string.you_should_login);
         // TODO : initiate successful logged in experience
         if (getContext() != null && getContext().getApplicationContext() != null) {
-            Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext().getApplicationContext(), register, Toast.LENGTH_LONG).show();
         }
+
+        switchToFragment(new LoginFragment(model.getUserName()));
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

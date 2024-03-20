@@ -38,6 +38,16 @@ public class LoginFragment extends Fragment {
     private LoginViewModel loginViewModel;
     private FragmentLoginBinding binding;
 
+    private String userName;
+
+    public LoginFragment(String userName) {
+        this.userName = userName;
+    }
+
+    public LoginFragment() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,6 +65,9 @@ public class LoginFragment extends Fragment {
                 .get(LoginViewModel.class);
 
         final EditText usernameEditText = binding.username;
+        if (this.userName != null) {
+            usernameEditText.setText(this.userName);
+        }
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
@@ -154,11 +167,13 @@ public class LoginFragment extends Fragment {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String welcome = getString(R.string.welcome) + " " + model.getDisplayName();
         // TODO : initiate successful logged in experience
         if (getContext() != null && getContext().getApplicationContext() != null) {
             Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
         }
+
+        startActivity(new Intent(getActivity(), MainActivity.class));
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

@@ -38,17 +38,17 @@ public class RegisterDataSource {
                         callback.onCallBackSuccess(registerMessage);
                     } else {
                         // Gestion d'une réponse inattendue du serveur
-                        callback.onCallBackError(new IOException("Unexpected response from server"));
+                        callback.onCallBackError(new IOException("EXISTS"));
                     }
                 } else {
                     // Gérer les réponses d'erreur ici
-                    callback.onCallBackError(new IOException("Register failed"));
+                    callback.onCallBackError(new IOException("EXISTS"));
                 }
             }
 
             @Override
             public void onFailure(Call<GenericResponseDto> call, Throwable t) {
-                callback.onCallBackError(new IOException("Error during login", t));
+                callback.onCallBackError(new IOException("Error during register", t));
             }
         });
 

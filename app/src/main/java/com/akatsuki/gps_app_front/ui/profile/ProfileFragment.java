@@ -23,7 +23,7 @@ import com.akatsuki.gps_app_front.databinding.FragmentProfileBinding;
 
 public class ProfileFragment extends Fragment {
 
-    private boolean isAuthentified;
+    private boolean isAuthentified = false;
     private boolean editMode = false;
     private FragmentProfileBinding binding;
 
@@ -32,7 +32,7 @@ public class ProfileFragment extends Fragment {
     }
 
     public void setAuthentified(boolean authentified) {
-        this.isAuthentified = authentified;
+        this.isAuthentified = false;
     }
 
     public boolean isEditMode() {
