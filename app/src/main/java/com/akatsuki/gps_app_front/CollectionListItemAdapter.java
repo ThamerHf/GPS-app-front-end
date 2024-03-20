@@ -1,13 +1,11 @@
 package com.akatsuki.gps_app_front;
 
-import static androidx.recyclerview.widget.RecyclerView.*;
-
 import android.content.Context;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,23 +13,27 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.akatsuki.gps_app_front.data.model.entity.Collection;
+import com.akatsuki.gps_app_front.ui.collection.CollectionFragment;
+import com.akatsuki.gps_app_front.ui.location.LocationFragment;
+import com.akatsuki.gps_app_front.ui.locations.LocationsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollectionListItemAdapter extends ArrayAdapter<String> implements Filterable {
+public class CollectionListItemAdapter extends ArrayAdapter<Collection> implements Filterable {
 
     private Context context;
     private LayoutInflater inflater;
 
-    private List<String> filteredCollection;
+    private List<Collection> filteredCollection;
 
-    private List<String> originalCollection;
+    private List<Collection> originalCollection;
 
     public CollectionListItemAdapter(@NonNull Context context, int resource,
-                           @NonNull List<String> collections) {
+                           @NonNull List<Collection> collections) {
         super(context, resource, collections);
         inflater = LayoutInflater.from(context);
         filteredCollection = new ArrayList<>(collections);
@@ -44,28 +46,49 @@ public class CollectionListItemAdapter extends ArrayAdapter<String> implements F
         ViewHolder viewHolder;
 
         if(convertView==null){
-        convertView=inflater.inflate(R.layout.fragment_collection_list_item,parent,false);
-        viewHolder=new ViewHolder(convertView);
-        convertView.setTag(viewHolder);
+            convertView=inflater.inflate(R.layout.fragment_collection_list_item,parent,false);
+            viewHolder=new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
         }else{
-        viewHolder=(ViewHolder)convertView.getTag();
+            viewHolder=(ViewHolder)convertView.getTag();
         }
 
-        String tag=getItem(position);
+        Collection collection = getItem(position);
 
         // Remplir la vue avec les données de l'élément
-        viewHolder.collectionName.setText(tag);
+        viewHolder.collectionName.setText(collection.getTag());
+        if (collection.getNumberOfLocations() != null) {
+            viewHolder.occurenceNumber.setText(""+collection.getNumberOfLocations());
+        }
         // Modifiez l'image ici si nécessaire (par exemple, à partir de ressources, d'URL, etc.)
+
+        convertView.findViewById(R.id.cardCollection).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Effectuer la transition vers le nouveau fragment
+                // Créer le nouveau fragment à afficher
+                Fragment newFragment = new LocationsFragment();
+
+                // Commencer la transaction pour remplacer le fragment actuel par le nouveau fragment
+                FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_container, newFragment);
+                transaction.addToBackStack(null); // Ajouter à la pile de retour arrière, si nécessaire
+                transaction.commit();
+            }
+        });
 
         return convertView;
     }
 
     private static class ViewHolder {
         TextView collectionName;
-
+        TextView occurenceNumber;
 
         ViewHolder(View view) {
+
             collectionName = view.findViewById(R.id.collectionName);
+            occurenceNumber = view.findViewById(R.id.collectionNumberElem);
+
         }
     }
 
@@ -76,13 +99,13 @@ public class CollectionListItemAdapter extends ArrayAdapter<String> implements F
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString().toLowerCase().trim();
-                List<String> filteredList = new ArrayList<>();
+                List<Collection> filteredList = new ArrayList<>();
                 if (charString.isEmpty()) {
                     filteredList.addAll(originalCollection);
                 } else {
-                    for (String tag : originalCollection) {
-                        if (tag.toLowerCase().contains(charString)) {
-                            filteredList.add(tag);
+                    for (Collection collection : originalCollection) {
+                        if (collection.getTag().toLowerCase().contains(charString)) {
+                            filteredList.add(collection);
                         }
                     }
                 }
@@ -93,7 +116,7 @@ public class CollectionListItemAdapter extends ArrayAdapter<String> implements F
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filteredCollection = (List<String>) results.values;
+                filteredCollection = (List<Collection>) results.values;
                 notifyDataSetChanged();
             }
         };
@@ -105,7 +128,7 @@ public class CollectionListItemAdapter extends ArrayAdapter<String> implements F
     }
 
     @Override
-    public String getItem(int position) {
+    public Collection getItem(int position) {
         return filteredCollection.get(position);
     }
 }

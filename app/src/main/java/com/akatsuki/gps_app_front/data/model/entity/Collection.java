@@ -7,19 +7,19 @@ public class Collection {
 
     public Collection(String tag, Long elemCount) {
         this.tag = tag;
-        ElemCount = elemCount;
+        numberOfLocations = elemCount;
     }
 
     private String tag;
 
-    private Long ElemCount;
+    private Long numberOfLocations;
 
-    public Long getElemCount() {
-        return ElemCount;
+    public Long getNumberOfLocations() {
+        return numberOfLocations;
     }
 
-    public void setElemCount(Long elemCount) {
-        ElemCount = elemCount;
+    public void setNumberOfLocations(Long numberOfLocations) {
+        this.numberOfLocations = numberOfLocations;
     }
 
     public String getTag() {

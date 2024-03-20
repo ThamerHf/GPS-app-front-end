@@ -17,7 +17,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.akatsuki.gps_app_front.data.model.entity.Location;
 import com.akatsuki.gps_app_front.ui.location.LocationFragment;
-import com.akatsuki.gps_app_front.ui.location.LocationsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
