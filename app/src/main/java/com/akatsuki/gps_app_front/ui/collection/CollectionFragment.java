@@ -25,7 +25,7 @@ import com.akatsuki.gps_app_front.data.model.entity.Location;
 import com.akatsuki.gps_app_front.data.repositories.repository.AuthenTokenRepository;
 import com.akatsuki.gps_app_front.databinding.FragmentCollectionBinding;
 import com.akatsuki.gps_app_front.databinding.FragmentLocationsBinding;
-import com.akatsuki.gps_app_front.ui.location.LocationsViewModel;
+import com.akatsuki.gps_app_front.ui.locations.LocationsViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;

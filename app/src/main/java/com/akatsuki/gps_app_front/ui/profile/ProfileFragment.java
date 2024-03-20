@@ -115,7 +115,6 @@ public class ProfileFragment extends Fragment {
             binding.avatar.setClickable(true);
             binding.saveProfile.setVisibility(View.VISIBLE);
             binding.logout.setVisibility(View.GONE);
-            binding.deleteAccount.setVisibility(View.GONE);
             binding.username.setEnabled(true);
             binding.yourName.setEnabled(true);
             binding.email.setEnabled(true);
@@ -124,7 +123,6 @@ public class ProfileFragment extends Fragment {
             binding.avatar.setClickable(false);
             binding.saveProfile.setVisibility(View.GONE);
             binding.logout.setVisibility(View.VISIBLE);
-            binding.deleteAccount.setVisibility(View.VISIBLE);
             binding.username.setEnabled(false);
             binding.yourName.setEnabled(false);
             binding.email.setEnabled(false);
