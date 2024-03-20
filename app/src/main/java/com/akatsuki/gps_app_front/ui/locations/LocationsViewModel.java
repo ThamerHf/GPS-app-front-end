@@ -1,4 +1,4 @@
-package com.akatsuki.gps_app_front.ui.location;
+package com.akatsuki.gps_app_front.ui.locations;
 
 import android.util.Log;
 

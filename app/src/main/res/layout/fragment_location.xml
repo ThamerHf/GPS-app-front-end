@@ -172,7 +172,7 @@
                     android:layout_height="80dp"
                     android:background="@color/edit_text"
                     android:hint="Description"
-                    android:layout_marginBottom="5dp"
+                    android:background="@color/e8f1ea"
                     android:inputType="text" />
 
                 <TextView
@@ -187,8 +187,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
-                    android:background="@color/edit_text"
-                    android:hint="Tags"
+                    android:background="@color/e8f1ea"
+                    android:hint="Description"
                     android:inputType="text" />
 
             </LinearLayout>

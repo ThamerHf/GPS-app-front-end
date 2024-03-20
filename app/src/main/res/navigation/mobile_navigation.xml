@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/navigation_locations"
-        android:name="com.akatsuki.gps_app_front.ui.location.LocationsFragment"
+        android:name="com.akatsuki.gps_app_front.ui.locations.LocationsFragment"
         tools:layout="@layout/fragment_locations" />
 
     <fragment

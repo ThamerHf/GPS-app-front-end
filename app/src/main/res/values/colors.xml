@@ -22,4 +22,5 @@
     <color name="edit_text">#E8F1EA</color>
     <color name="card_background">@color/cardview_light_background</color>
     <color name="edit_icon_color">#282928</color>
+    <color name="e8f1ea">#E8F1EA</color>
 </resources>
