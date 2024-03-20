@@ -77,7 +77,7 @@ public class LocationFragment extends Fragment {
         consultingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                switchToFragment(new HomeFragment());
+                switchToFragment(new HomeFragment(location));
             }
         });
 
@@ -88,7 +88,7 @@ public class LocationFragment extends Fragment {
     private void switchToFragment(Fragment fragment) {
         FragmentTransaction transaction = requireActivity()
                 .getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.layout.fragment_location, fragment);
+        transaction.replace(R.id.main_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }

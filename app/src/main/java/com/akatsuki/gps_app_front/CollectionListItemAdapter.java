@@ -24,7 +24,6 @@ import java.util.List;
 public class CollectionListItemAdapter extends ArrayAdapter<String> implements Filterable {
 
     private Context context;
-
     private LayoutInflater inflater;
 
     private List<String> filteredCollection;
