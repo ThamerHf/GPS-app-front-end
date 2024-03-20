@@ -169,7 +169,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:hint="Description"
-                    android:background="#66BF81"
+                    android:background="@color/e8f1ea"
                     android:inputType="text" />
 
                 <EditText
@@ -177,7 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="10dp"
-                    android:background="#66BF81"
+                    android:background="@color/e8f1ea"
                     android:hint="Description"
                     android:inputType="text" />
 
