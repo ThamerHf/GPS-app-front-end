@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.akatsuki.gps_app_front.LoginRegisterActivity;
 import com.akatsuki.gps_app_front.R;
@@ -44,34 +45,50 @@ public class LocationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        FragmentLocationBinding binding;
-        binding = FragmentLocationBinding.inflate(inflater,container, false);
-        View view =binding.getRoot();
+        FragmentLocationBinding binding = FragmentLocationBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        ImageButton deleteButton = view.findViewById(R.id.deleteButton);
-        ImageButton shareButton = view.findViewById(R.id.shareButton);
-        ImageButton downloadButton = view.findViewById(R.id.downloadButton);
-        ImageButton editButton = view.findViewById(R.id.editButton);
-        Button consultingButton = view.findViewById(R.id.consultingButton);
-        EditText editText = view.findViewById(R.id.locationTitle);
+        ImageButton deleteButton = binding.deleteButton;
+        ImageButton shareButton = binding.shareButton;
+        ImageButton downloadButton = binding.downloadButton;
+        ImageButton editButton = binding.editButton;
+        Button openInMap = binding.consultingButton;
+        Button consultingButton = binding.consultingButton;
+        EditText locationTitle = binding.locationTitle;
+        EditText locationTags = binding.locationTags;
+        EditText locationDescription = binding.locationDescription;
 
+        // Assurez-vous que la location n'est pas nulle
+        if (location != null) {
+            // Fixez le texte des EditText avec les valeurs de la location
+            locationTitle.setText(location.getTitle());
+            locationTags.setText(location.getDescription());
+
+            // Si la liste des tags n'est pas nulle, la concaténer et la fixer au EditText
+            if (location.getTags() != null) {
+                StringBuilder tagsBuilder = new StringBuilder();
+                for (String tag : location.getTags()) {
+                    tagsBuilder.append(tag).append(", ");
+                }
+                locationDescription.setText(tagsBuilder.toString());
+            }
+        }
 
         consultingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                switchToFragment(new HomeFragment());
+                switchToFragment(new HomeFragment(location));
             }
         });
 
-
-        return inflater.inflate(R.layout.fragment_location, container, false);
+        return view;
     }
 
     @SuppressLint("ResourceType")
     private void switchToFragment(Fragment fragment) {
         FragmentTransaction transaction = requireActivity()
                 .getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.layout.fragment_location, fragment);
+        transaction.replace(R.id.main_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
