@@ -15,9 +15,9 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface LocationApi {
-    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @Headers({ "Content-Type: application/json"})
     @GET("locations")
-    Call<List<Location>> getLocations();
+    Call<List<Location>> getLocations(@Header("Authorization") String authToken);
 
 
 }

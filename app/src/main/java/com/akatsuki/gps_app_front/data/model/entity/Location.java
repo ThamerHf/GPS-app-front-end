@@ -2,35 +2,32 @@ package com.akatsuki.gps_app_front.data.model.entity;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Location {
-    public Location(String description, Long locationId, String title, String adresse, Double coord) {
-        this.description = description;
-        this.locationId = locationId;
-        this.title = title;
-        this.adresse = adresse;
-        this.coord = coord;
-    }
+    private Long locationId;
 
     private String title;
 
     private String description;
-    private Long locationId;
 
     private String adresse;
 
-    private Double coord;
+    private List<Double> coord = new ArrayList<>();
 
-    private byte[] image;
+    private String image;
 
-    public byte[] getImage() {
-        return image;
+    private List<String> tags = new ArrayList<>();
+
+    public Long getLocationId() {
+        return locationId;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
 
     public String getTitle() {
@@ -41,12 +38,12 @@ public class Location {
         this.title = title;
     }
 
-    public Long getLocationId() {
-        return locationId;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLocationId(Long locationId) {
-        this.locationId = locationId;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getAdresse() {
@@ -57,19 +54,27 @@ public class Location {
         this.adresse = adresse;
     }
 
-    public Double getCoord() {
+    public List<Double> getCoord() {
         return coord;
     }
 
-    public void setCoord(Double coord) {
+    public void setCoord(List<Double> coord) {
         this.coord = coord;
     }
 
-    public String getDescription() {
-        return description;
+    public String getImage() {
+        return image;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }

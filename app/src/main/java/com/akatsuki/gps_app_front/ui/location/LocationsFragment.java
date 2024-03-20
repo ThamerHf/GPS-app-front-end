@@ -53,9 +53,30 @@ public class LocationsFragment extends Fragment {
         locationsViewModel.getLocations(new AppCallback<List<Location>>() {
             @Override
             public void onCallBackSuccess(List<Location> locationsreceived) {
-                System.out.println("callbackSuccess");
                 Log.d("location", "Debug callback succesful");
                 locations.addAll(locationsreceived);
+                LocationListItemAdapter adapter = new LocationListItemAdapter(requireContext(),
+                        R.layout.location_list_item,
+                        locations);
+                list.setAdapter(adapter);
+
+                EditText editText = view.findViewById(R.id.searchLocation);
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        adapter.getFilter().filter(s);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
             }
 
             @Override
@@ -64,28 +85,6 @@ public class LocationsFragment extends Fragment {
             }
         });
         // Ajoutez autant d'éléments que nécessaire
-
-        LocationListItemAdapter adapter = new LocationListItemAdapter(requireContext(), R.layout.location_list_item,
-                locations);
-        list.setAdapter(adapter);
-
-        EditText editText = view.findViewById(R.id.searchLocation);
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         return view;
     }

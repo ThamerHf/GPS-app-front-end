@@ -1,8 +1,6 @@
 package com.akatsuki.gps_app_front;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +28,11 @@ public class LocationListItemAdapter extends ArrayAdapter<Location> implements F
     private List<Location> originalCollection;
 
     public LocationListItemAdapter(@NonNull Context context, int resource,
-                                     @NonNull List<Location> collections) {
-        super(context, resource, collections);
+                                     @NonNull List<Location> locations) {
+        super(context, resource, locations);
         inflater = LayoutInflater.from(context);
-        filteredCollection = new ArrayList<>(collections);
-        originalCollection = new ArrayList<>(collections);
+        filteredCollection = new ArrayList<>(locations);
+        originalCollection = new ArrayList<>(locations);
         this.context = context;
     }
 
@@ -55,27 +53,38 @@ public class LocationListItemAdapter extends ArrayAdapter<Location> implements F
         // Remplir la vue avec les données de l'élément
 
         viewHolder.locationName.setText(location.getTitle());
-        viewHolder.description.setText(location.getDescription());
+        String tags = "";
+        int i;
+        for(i = 0; i <= 4; i++) {
+            try {
+                tags = tags + location.getTags().get(i) + ", ";
+            } catch (Exception e) {
+
+            }
+        }
+
+        tags = tags + "...";
+        viewHolder.tags.setText(tags);
         if(location.getImage() == null){
             viewHolder.image.setImageResource(R.drawable.collection_default_image);
         }
-        else {
+        /*else {
             Bitmap bitmap = BitmapFactory
                     .decodeByteArray(location.getImage(),0, location.getImage().length);
             viewHolder.image.setImageBitmap(bitmap);
-        }
+        }*/
 
         return convertView;
     }
 
     private static class ViewHolder {
         TextView locationName;
-        TextView description;
+        TextView tags;
         ImageView image;
         ViewHolder(View view) {
 
             locationName = view.findViewById(R.id.LocationName);
-            description  = view.findViewById(R.id.LocationSupportingText);
+            tags = view.findViewById(R.id.LocationSupportingText);
             image = view.findViewById(R.id.LocationImage);
         }
     }

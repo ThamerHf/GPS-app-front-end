@@ -40,7 +40,8 @@ public class LocationsViewModel extends ViewModel {
                 System.out.println("1");
                 LocationApi locationApi = RetrofitClient.getClient()
                         .create(LocationApi.class);
-                Call<List<Location>> call = locationApi.getLocations();
+                Call<List<Location>> call = locationApi.getLocations("Bearer " +
+                        authenToken.getToken());
                 call.enqueue(new Callback<List<Location>>() {
 
                     @Override
