@@ -58,12 +58,14 @@ public class AuthenTokenRepository {
                public void onSuccess(List<AuthenToken> authenToken) {
                    if (!authenToken.isEmpty()) {
                        callback.onCallBackSuccess(authenToken.get(0));
+                   } else {
+                       callback.onCallBackError(new IOException("No authentication token"));
                    }
                }
 
                @Override
                public void onError(Throwable e) {
-                   callback.onCallBackError(new IOException("update token failed"));
+                   callback.onCallBackError(new IOException("No authentication token"));
                }
             }
         );
