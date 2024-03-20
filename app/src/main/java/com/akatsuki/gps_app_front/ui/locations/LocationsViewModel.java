@@ -57,7 +57,7 @@ public class LocationsViewModel extends ViewModel {
                             }
                         } else {
                             // Gérer les réponses d'erreur ici
-                            callback.onCallBackError(new IOException("Login failed"));
+                            callback.onCallBackError(new IOException("Get locations failed"));
                             Log.d("location", "response unseccesful");
                         }
                     }

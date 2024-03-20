@@ -1,4 +1,4 @@
-package com.akatsuki.gps_app_front.ui.location;
+package com.akatsuki.gps_app_front.ui.locations;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -35,6 +35,12 @@ public class LocationsFragment extends Fragment {
 
     private FragmentLocationsBinding binding;
 
+
+    public LocationsFragment() {
+    }
+
+    public LocationsFragment(Location location) {
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

@@ -57,7 +57,7 @@ public class CollectionViewModel extends ViewModel {
                             }
                         } else {
                             // Gérer les réponses d'erreur ici
-                            callback.onCallBackError(new IOException("Login failed"));
+                            callback.onCallBackError(new IOException("Get Collection failed"));
                             Log.d("collection", "response unseccesful");
                         }
                     }

@@ -44,7 +44,7 @@ public class CollectionFragment extends Fragment {
         binding = FragmentCollectionBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        ListView list = binding.getRoot().findViewById(R.id.listLocations);
+        ListView list = binding.getRoot().findViewById(R.id.listCollections);
         Log.d("location", "test");
 
         List<Collection> collections =  new ArrayList<>();
@@ -60,7 +60,7 @@ public class CollectionFragment extends Fragment {
                         collections);
                 list.setAdapter(adapter);
 
-                EditText editText = view.findViewById(R.id.searchLocation);
+                EditText editText = view.findViewById(R.id.search_collection);
                 editText.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
