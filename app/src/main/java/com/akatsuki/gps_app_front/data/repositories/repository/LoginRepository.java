@@ -66,7 +66,7 @@ public class LoginRepository {
     public Result<LoggedInUser> login(String username, String password,
                                       MutableLiveData<LoginResult> loginResult) {
         AuthenToken authenToken = new AuthenToken();
-        LoggedInUser loggedInUserAuth = new LoggedInUser("aaaaa", "aaaaaaaa");
+        LoggedInUser loggedInUserAuth = new LoggedInUser("dafault", "dafault");
         // handle login
 
         CompletableFuture<TokenResponseDto> future = new CompletableFuture<>();
