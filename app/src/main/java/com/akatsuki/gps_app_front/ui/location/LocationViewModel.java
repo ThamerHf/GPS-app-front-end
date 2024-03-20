@@ -44,13 +44,12 @@ public class LocationViewModel extends ViewModel {
     }
 
     public void onEditButtonClick() {
-        // Implement edit button action here
+
     }
     public void onShareButtonClick() {
-        // Implement share button action here
+
     }
     public void onDownloadButtonClick() {
-        // Implement download button action here
     }
 
 }
