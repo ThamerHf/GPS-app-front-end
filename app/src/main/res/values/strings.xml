@@ -39,4 +39,10 @@
     <string name="last_name">Last name</string>
     <string name="hugo">HUGO</string>
     <string name="delete_account">Delete Account</string>
+    <string name="not_a_valid_firstname">Not a valid firstName</string>
+    <string name="not_a_valid_lastname">Not a valid lastName</string>
+    <string name="not_a_valid_email">Not a valid email</string>
+    <string name="not_a_valid_password">Password must be >5 characters</string>
+    <string name="doesn_t_match_entred_password">Doesn\'t match entred password</string>
+    <string name="register_failed">Register Failed</string>
 </resources>

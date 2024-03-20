@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,6 @@ public class LoginFragment extends Fragment {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     @Override
@@ -81,6 +81,7 @@ public class LoginFragment extends Fragment {
                 if (loginFormState == null) {
                     return;
                 }
+
                 loginButton.setEnabled(loginFormState.isDataValid());
 
                 int buttonColor = loginButton.isEnabled() ? Color.parseColor("#66BF81") :
